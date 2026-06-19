@@ -1,333 +1,399 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>С днём рождения, тётя Ирина!</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С Днём Рождения, тётя Ирина!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(145deg, #f7c0e0 0%, #d687d6 70%, #a04b9e 100%);
-      font-family: 'Segoe UI', 'Roboto', cursive, sans-serif;
-      padding: 20px;
-      position: relative;
-      overflow-x: hidden;
-    }
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: #c77dff; /* ОДИН СПЛОШНОЙ ЦВЕТ — яркий фиолетово-розовый */
+            padding: 20px;
+            overflow-x: hidden;
+        }
 
-    /* Цветочный фон (летающие цветы) */
-    .flowers-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
+        /* Цветочный фон (декоративные элементы) */
+        .flower-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
 
-    .flower {
-      position: absolute;
-      font-size: 3rem;
-      opacity: 0.25;
-      animation: floatFlower 12s infinite alternate ease-in-out;
-      transform-origin: center;
-      color: #ffecbb;
-      text-shadow: 0 0 15px rgba(255, 200, 255, 0.6);
-    }
+        .flower {
+            position: absolute;
+            font-size: 3.5rem;
+            opacity: 0.25;
+            animation: floatFlower 12s infinite alternate ease-in-out;
+            user-select: none;
+        }
 
-    .flower:nth-child(1) { left: 5%; top: 10%; animation-duration: 14s; font-size: 4.5rem; }
-    .flower:nth-child(2) { right: 8%; top: 15%; animation-duration: 11s; font-size: 3.8rem; animation-delay: -2s; }
-    .flower:nth-child(3) { left: 15%; bottom: 20%; animation-duration: 16s; font-size: 5rem; animation-delay: -4s; }
-    .flower:nth-child(4) { right: 5%; bottom: 10%; animation-duration: 13s; font-size: 4.2rem; animation-delay: -1s; }
-    .flower:nth-child(5) { left: 45%; top: 5%; animation-duration: 15s; font-size: 3.5rem; animation-delay: -3s; }
-    .flower:nth-child(6) { left: 70%; top: 55%; animation-duration: 17s; font-size: 4.8rem; animation-delay: -5s; }
-    .flower:nth-child(7) { left: 20%; top: 45%; animation-duration: 12s; font-size: 3.2rem; animation-delay: -1s; }
-    .flower:nth-child(8) { right: 20%; bottom: 30%; animation-duration: 14s; font-size: 4rem; animation-delay: -6s; }
+        .flower:nth-child(1) { top: 5%; left: 3%; font-size: 5rem; animation-duration: 14s; opacity: 0.2; }
+        .flower:nth-child(2) { top: 15%; right: 6%; font-size: 4.2rem; animation-duration: 11s; opacity: 0.2; }
+        .flower:nth-child(3) { bottom: 20%; left: 8%; font-size: 6rem; animation-duration: 16s; opacity: 0.2; }
+        .flower:nth-child(4) { bottom: 10%; right: 4%; font-size: 4.8rem; animation-duration: 13s; opacity: 0.2; }
+        .flower:nth-child(5) { top: 45%; left: 2%; font-size: 3.8rem; animation-duration: 15s; opacity: 0.2; }
+        .flower:nth-child(6) { top: 40%; right: 2%; font-size: 4.5rem; animation-duration: 12s; opacity: 0.2; }
+        .flower:nth-child(7) { top: 70%; left: 20%; font-size: 5.2rem; animation-duration: 17s; opacity: 0.2; }
+        .flower:nth-child(8) { bottom: 5%; left: 40%; font-size: 4rem; animation-duration: 14s; opacity: 0.2; }
 
-    @keyframes floatFlower {
-      0% { transform: translate(0, 0) rotate(0deg) scale(0.9); }
-      100% { transform: translate(40px, -30px) rotate(25deg) scale(1.2); }
-    }
+        @keyframes floatFlower {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            100% { transform: translate(20px, -30px) rotate(12deg) scale(1.1); }
+        }
 
-    /* Карточка поздравления */
-    .card {
-      position: relative;
-      z-index: 10;
-      max-width: 780px;
-      width: 100%;
-      background: rgba(255, 240, 255, 0.2);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 60px 60px 60px 60px;
-      padding: 2.8rem 2.5rem;
-      box-shadow: 0 30px 50px rgba(110, 30, 110, 0.5),
-                  inset 0 2px 10px rgba(255, 220, 255, 0.6);
-      border: 2px solid rgba(255, 220, 255, 0.5);
-      transition: 0.3s;
-      text-align: center;
-    }
+        /* Основная карточка */
+        .card {
+            position: relative;
+            z-index: 10;
+            max-width: 780px;
+            width: 100%;
+            background: rgba(255, 240, 255, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 60px 60px 60px 60px;
+            box-shadow: 0 30px 50px rgba(150, 50, 180, 0.4), 0 0 0 2px rgba(255, 200, 255, 0.6) inset;
+            padding: 40px 30px 50px;
+            text-align: center;
+            border: 1px solid rgba(255, 220, 255, 0.8);
+            transition: all 0.2s;
+        }
 
-    .card:hover {
-      transform: scale(1.01);
-      box-shadow: 0 40px 70px rgba(130, 20, 130, 0.6);
-    }
+        /* Заголовок */
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #6a1b8a;
+            text-shadow: 0 4px 20px rgba(255, 140, 255, 0.7), 0 0 10px #ffb3ff;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            word-break: break-word;
+        }
 
-    /* Заголовок */
-    h1 {
-      font-size: 3.8rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #fce38a, #ffb7f0, #e57cdb);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 20px rgba(255, 150, 255, 0.7);
-      letter-spacing: 2px;
-      margin-bottom: 0.25rem;
-      font-family: 'Georgia', cursive;
-    }
+        .subhead {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #b23d8a;
+            background: linear-gradient(135deg, #ff85d4, #b06eff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
 
-    .sub {
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: #fff6d0;
-      text-shadow: 0 0 20px #cf7fc7, 0 0 40px #b34faf;
-      letter-spacing: 4px;
-      background: rgba(150, 50, 150, 0.3);
-      display: inline-block;
-      padding: 0.2rem 2rem;
-      border-radius: 60px;
-      backdrop-filter: blur(4px);
-      margin-bottom: 1.5rem;
-      border: 1px solid #ffc8f0;
-    }
+        .divider {
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #ff88dd, #c57aff, #ff88dd);
+            margin: 15px auto 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #e07cff;
+        }
 
-    /* Строчки поздравления — цвети всегда и будь светлой как солнце */
-    .poem {
-      font-size: 2.2rem;
-      line-height: 1.6;
-      font-weight: 600;
-      color: #fff9ea;
-      text-shadow: 0 0 15px #b23fb2, 0 0 30px #a03d9e;
-      margin: 2rem 0 1.8rem;
-      padding: 0.5rem;
-      background: rgba(180, 70, 170, 0.25);
-      border-radius: 80px;
-      backdrop-filter: blur(4px);
-      border: 1px dashed #fbc3f0;
-    }
+        /* Текст поздравления */
+        .poem {
+            font-size: 1.7rem;
+            line-height: 2.3rem;
+            color: #3d1352;
+            font-weight: 500;
+            padding: 15px 10px;
+            background: rgba(255, 230, 255, 0.3);
+            border-radius: 70px 20px 70px 20px;
+            box-shadow: 0 8px 18px rgba(180, 80, 200, 0.15);
+            backdrop-filter: blur(4px);
+            margin: 20px 0 30px;
+            border-left: 6px solid #ff99e6;
+            border-right: 6px solid #b47aff;
+        }
 
-    .poem span {
-      display: inline-block;
-      animation: glowPulse 3s infinite alternate;
-    }
+        .poem p {
+            margin: 12px 0;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
 
-    @keyframes glowPulse {
-      0% { text-shadow: 0 0 8px #ffb0f0, 0 0 20px #d77ad7; }
-      100% { text-shadow: 0 0 20px #ffd9ff, 0 0 50px #ff8cf0, 0 0 80px #ba52b0; }
-    }
+        .poem .highlight {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff66cc, #aa66ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 1.9rem;
+            text-shadow: 0 0 30px #ffa6ff;
+        }
 
-    .poem i {
-      font-style: normal;
-      display: block;
-      font-size: 2.5rem;
-      margin: 0.5rem 0;
-    }
+        /* Строка "цвети всегда" */
+        .special-line {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #6f1d8a;
+            background: rgba(255, 220, 255, 0.5);
+            padding: 12px 20px;
+            border-radius: 100px;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+            border: 1px solid #ffb3f0;
+            box-shadow: 0 4px 30px rgba(210, 80, 255, 0.3);
+            margin: 15px 0 10px;
+            letter-spacing: 2px;
+            -webkit-text-stroke: 1px rgba(255, 200, 255, 0.3);
+        }
 
-    /* Доп. текст + имя */
-    .name {
-      font-size: 3.2rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #ffd966, #fbb1f0, #d47ad4);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin: 0.3rem 0 0.8rem;
-      letter-spacing: 8px;
-      text-shadow: 0 0 30px #ffa5f0;
-    }
+        .special-line span {
+            background: linear-gradient(135deg, #ff3399, #b366ff, #ff66aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px #ff99ff;
+        }
 
-    .footer-note {
-      font-size: 1.5rem;
-      color: #ffeaf5;
-      background: rgba(200, 80, 190, 0.25);
-      backdrop-filter: blur(4px);
-      padding: 0.6rem 1.5rem;
-      border-radius: 50px;
-      display: inline-block;
-      border: 1px solid #ffc0f0;
-      margin-top: 0.5rem;
-      font-weight: 400;
-      letter-spacing: 1px;
-    }
+        .sun-icon {
+            display: inline-block;
+            font-size: 2.6rem;
+            filter: drop-shadow(0 0 15px #ffcc66);
+            margin: 0 6px;
+        }
 
-    /* Цветочные эмодзи в тексте */
-    .flowers-inline {
-      font-size: 2.8rem;
-      letter-spacing: 8px;
-      filter: drop-shadow(0 0 8px #ffb0f0);
-    }
+        /* Цветочная рамка */
+        .flower-frame {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            font-size: 2.8rem;
+            margin: 20px 0 10px;
+            filter: drop-shadow(0 4px 10px #d37eff);
+        }
 
-    /* Адаптив */
-    @media (max-width: 600px) {
-      .card { padding: 1.8rem 1.2rem; }
-      h1 { font-size: 2.8rem; }
-      .sub { font-size: 1.3rem; padding: 0.2rem 1rem; }
-      .poem { font-size: 1.7rem; }
-      .poem i { font-size: 2rem; }
-      .name { font-size: 2.5rem; }
-      .footer-note { font-size: 1.2rem; }
-      .flower { font-size: 2.5rem; }
-    }
+        .flower-frame span {
+            opacity: 0.9;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
 
-    /* Стиль для аудио-плеера (кастомный) */
-    .audio-wrapper {
-      margin-top: 25px;
-      display: flex;
-      justify-content: center;
-    }
+        .flower-frame span:hover {
+            transform: scale(1.3) rotate(10deg);
+        }
 
-    audio {
-      width: 240px;
-      height: 40px;
-      border-radius: 60px;
-      background: rgba(255, 220, 255, 0.3);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 0 30px rgba(200, 100, 200, 0.6);
-      border: 1px solid #fbc3f0;
-    }
+        /* Аудио плеер (кастомный) */
+        .music-player {
+            margin: 30px 0 15px;
+            background: rgba(255, 210, 255, 0.4);
+            backdrop-filter: blur(6px);
+            padding: 14px 18px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 180, 255, 0.8);
+            box-shadow: 0 0 30px rgba(200, 100, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
 
-    audio::-webkit-media-controls-panel {
-      background: rgba(200, 80, 200, 0.3);
-      border-radius: 60px;
-    }
+        .music-player audio {
+            width: 100%;
+            max-width: 320px;
+            height: 46px;
+            border-radius: 40px;
+            outline: none;
+            background: #f7dcff;
+            box-shadow: 0 0 20px #d47eff;
+        }
 
-    audio::-webkit-media-controls-play-button {
-      background: #f7b0f0;
-      border-radius: 50%;
-      filter: drop-shadow(0 0 8px #b34faf);
-    }
+        .music-player audio::-webkit-media-controls-panel {
+            background: #f7dcff;
+            border-radius: 40px;
+        }
 
-    /* Декоративная рамка */
-    .glow-border {
-      position: absolute;
-      top: -6px;
-      left: -6px;
-      right: -6px;
-      bottom: -6px;
-      border-radius: 70px;
-      background: linear-gradient(45deg, #ff93e0, #b45fdb, #f07cd0, #b74bb2);
-      background-size: 300% 300%;
-      z-index: -1;
-      animation: borderGlow 6s ease infinite;
-      opacity: 0.7;
-      filter: blur(6px);
-    }
+        .music-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #4f1a5f;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 240, 255, 0.3);
+            padding: 6px 15px;
+            border-radius: 40px;
+            letter-spacing: 0.5px;
+        }
 
-    @keyframes borderGlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        .music-label i {
+            font-style: normal;
+            font-size: 1.6rem;
+        }
 
-    .card-inner {
-      position: relative;
-      z-index: 2;
-    }
+        /* кнопка (запасной вариант) */
+        .btn-play {
+            background: #c57aff;
+            border: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 10px 28px;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #6f2b8f, 0 8px 20px rgba(160, 60, 200, 0.5);
+            transition: 0.1s ease;
+            letter-spacing: 1px;
+        }
 
-    /* Небольшие дополнительные цветочки в тексте */
-    .flower-text {
-      font-size: 2rem;
-      opacity: 0.9;
-    }
+        .btn-play:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #6f2b8f;
+        }
 
-  </style>
+        /* Адаптив */
+        @media (max-width: 550px) {
+            .card { padding: 30px 20px; }
+            h1 { font-size: 2.5rem; }
+            .subhead { font-size: 1.5rem; }
+            .poem { font-size: 1.3rem; line-height: 2rem; }
+            .poem .highlight { font-size: 1.5rem; }
+            .special-line { font-size: 1.7rem; }
+            .flower { font-size: 2.5rem; }
+        }
+
+        @media (max-width: 400px) {
+            .card { padding: 20px 15px; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
-  <!-- Летающие цветы на фоне -->
-  <div class="flowers-bg">
-    <div class="flower">🌸</div>
-    <div class="flower">🌺</div>
-    <div class="flower">🌷</div>
-    <div class="flower">🌹</div>
-    <div class="flower">🌸</div>
-    <div class="flower">🌺</div>
-    <div class="flower">🌷</div>
-    <div class="flower">🌹</div>
-    <div class="flower" style="left:60%; top:80%; font-size:3.2rem;">🌸</div>
-    <div class="flower" style="left:10%; top:75%; font-size:4rem;">🌺</div>
-  </div>
 
-  <!-- Основная карточка -->
-  <div class="card">
-    <div class="glow-border"></div>
-    <div class="card-inner">
-      <!-- Заголовок -->
-      <h1>🎉 С днём рождения! 🎉</h1>
-      <div class="sub">тётя Ирина</div>
-
-      <!-- Цветочная строка -->
-      <div class="flowers-inline">🌸 🌺 🌷 🌹 🌸</div>
-
-      <!-- Главные строчки поздравления: "цвети всегда и будь светлой как солнце" -->
-      <div class="poem">
-        <span>🌸 Цвети всегда, как вешний сад,</span>
-        <i>✨ и будь светлой, как солнце! ✨</i>
-        <span style="font-size:1.8rem; display:block; margin-top:10px;">
-          🌞 Пусть каждый день сияет ярко, 
-        </span>
-        <span style="font-size:1.8rem; display:block;">
-          💖 а счастье льётся через край! 💖
-        </span>
-      </div>
-
-      <!-- Имя + сердечки -->
-      <div class="name">💜 Ириночка 💜</div>
-
-      <!-- Дополнительные пожелания -->
-      <div class="footer-note">
-        🌷 С любовью и теплом 🌷
-      </div>
-
-      <!-- Музыкальный плеер (ссылка из GitHub) -->
-      <div class="audio-wrapper">
-        <audio controls autoplay loop>
-          <source src="https://github.com/POLOLRED/Irina/blob/main/YA_dyshu-Irina_Allegrova_-_Den_Rozhdeniya_-_S_Dnjom_Rozhdeniya_Uspekha_radosti_vezeniya_lyubykh_zhelanijj_ispolneniya_i_million_nochejj_i_dnejj_S_Dnjom_Rozhdeniya_Lyubvi_do_golovokruzheniya_i_74820012%20(1).mp3?raw=true" type="audio/mpeg">
-          Ваш браузер не поддерживает аудио.
-        </audio>
-      </div>
-      <p style="color: #fadef5; font-size: 0.9rem; margin-top: 10px; opacity: 0.8; letter-spacing: 2px;">
-        🎵 Ирина Аллегрова — «День Рождения» 🎵
-      </p>
-
-      <!-- Ещё цветочки -->
-      <div style="margin-top: 10px; font-size: 2.2rem; letter-spacing: 10px; opacity: 0.7;">
-        🌸🌺🌷🌹🌸
-      </div>
+    <!-- Цветочный фон -->
+    <div class="flower-bg">
+        <span class="flower">🌸</span>
+        <span class="flower">🌺</span>
+        <span class="flower">🌷</span>
+        <span class="flower">🌹</span>
+        <span class="flower">🌻</span>
+        <span class="flower">🌼</span>
+        <span class="flower">💐</span>
+        <span class="flower">🌸</span>
+        <span class="flower">🌺</span>
+        <span class="flower">🌷</span>
     </div>
-  </div>
 
-  <!-- Дополнительный скрипт, чтобы музыка точно стартовала после загрузки (на всякий случай) -->
-  <script>
-    window.addEventListener('load', function() {
-      const audio = document.querySelector('audio');
-      if (audio) {
-        // Пытаемся запустить автоматически (плюс у тега autoplay уже есть)
-        audio.play().catch(e => {
-          // Если автоплей заблокирован, можно показать сообщение, но это не критично
-          console.log('Автозапуск музыки возможен только после взаимодействия с страницей.');
-        });
-      }
-    });
-  </script>
+    <!-- Основная карточка -->
+    <div class="card">
+        <h1>🎉 Тётя Ирина 🎉</h1>
+        <div class="subhead">С Днём Рождения!</div>
+        <div class="divider"></div>
+
+        <!-- поздравление -->
+        <div class="poem">
+            <p>✨ Пусть каждый день искрится счастьем,</p>
+            <p>💖 А сердце полнится теплом,</p>
+            <p>🌺 Удача ходит с Вами рядом,</p>
+            <p>🍀 И дом сияет волшебством!</p>
+            <p style="margin-top: 8px;">
+                <span class="highlight">Цвети всегда</span> — как майский сад,
+            </p>
+            <p style="margin-bottom: 0;">
+                <span class="highlight">Будь светлой</span>, словно солнца взгляд!
+            </p>
+        </div>
+
+        <!-- Цветочная рамка и особенная строка -->
+        <div class="flower-frame">
+            <span>🌼</span> <span>💐</span> <span>🌹</span> <span>🌷</span> <span>🌸</span>
+        </div>
+
+        <div class="special-line">
+            <span class="sun-icon">☀️</span>
+            <span>Свети всегда, будь как солнце!</span>
+            <span class="sun-icon">☀️</span>
+        </div>
+
+        <div style="margin: 10px 0 20px; font-size: 1.4rem; color: #8b3f9b; font-weight: 500; background: rgba(255,210,255,0.25); padding: 5px 12px; border-radius: 40px; display: inline-block;">
+            🌟 С любовью и нежностью 🌟
+        </div>
+
+        <!-- Музыкальный плеер -->
+        <div class="music-player">
+            <div class="music-label">
+                <i>🎵</i> Поздравительная
+            </div>
+            <audio id="birthdayAudio" controls preload="auto">
+                <source src="https://github.com/POLOLRED/Irina/blob/main/YA_dyshu-Irina_Allegrova_-_Den_Rozhdeniya_-_S_Dnjom_Rozhdeniya_Uspekha_radosti_vezeniya_lyubykh_zhelanijj_ispolneniya_i_million_nochejj_i_dnejj_S_Dnjom_Rozhdeniya_Lyubvi_do_golovokruzheniya_i_74820012%20(1).mp3?raw=true" type="audio/mpeg">
+                Ваш браузер не поддерживает аудио-тег.
+            </audio>
+        </div>
+
+        <!-- Дополнительный кнопочный запуск (на всякий) -->
+        <div style="margin-top: 5px;">
+            <button class="btn-play" id="playBtn">▶ Включить музыку</button>
+        </div>
+
+        <div style="margin-top: 20px; font-size: 1.1rem; color: #661d7a; opacity: 0.8; letter-spacing: 1px;">
+            💖 Для тебя, любимая тётя Ирина! 💖
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const audio = document.getElementById('birthdayAudio');
+
+            window.addEventListener('load', function() {
+                setTimeout(() => {
+                    audio.play().catch(function(error) {
+                        console.log('Autoplay was prevented:', error);
+                    });
+                }, 300);
+            });
+
+            const playBtn = document.getElementById('playBtn');
+            if (playBtn) {
+                playBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (audio.paused) {
+                        audio.play().catch(err => {
+                            alert('Пожалуйста, нажмите на плеер для воспроизведения (разрешите автозапуск)');
+                        });
+                    } else {
+                        audio.pause();
+                        playBtn.textContent = '▶ Включить музыку';
+                    }
+                });
+
+                audio.addEventListener('play', function() {
+                    playBtn.textContent = '⏸ Пауза';
+                });
+                audio.addEventListener('pause', function() {
+                    playBtn.textContent = '▶ Включить музыку';
+                });
+                audio.addEventListener('ended', function() {
+                    playBtn.textContent = '▶ Включить музыку';
+                });
+            }
+
+            document.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play().catch(() => {});
+                }
+            }, { once: true });
+
+        })();
+    </script>
+
 </body>
 </html>
