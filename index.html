@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>С Днём Рождения, тётя Ирина!</title>
     <style>
         * {
@@ -11,15 +11,23 @@
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            min-height: 100dvh; /* для мобильных браузеров */
             font-family: 'Segoe UI', 'Arial', sans-serif;
             background: #c77dff;
             padding: 20px;
-            overflow: hidden;
+            overflow-y: auto; /* ВКЛЮЧАЕМ СКРОЛЛ */
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch; /* плавный скролл на iOS */
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* выравнивание по верху, чтобы скролл работал */
+            min-height: 100vh;
+            min-height: 100dvh;
         }
 
         .flower-bg {
@@ -62,6 +70,7 @@
             padding: 40px 30px 50px;
             text-align: center;
             border: 1px solid rgba(255, 220, 255, 0.8);
+            margin: 20px 0; /* отступы сверху и снизу для скролла */
         }
 
         h1 {
@@ -285,7 +294,6 @@
         (function() {
             const audio = document.getElementById('birthdayAudio');
 
-            // Автозапуск при загрузке
             window.addEventListener('load', function() {
                 setTimeout(() => {
                     audio.play().catch(function(error) {
@@ -294,7 +302,6 @@
                 }, 300);
             });
 
-            // Если браузер заблокировал автозапуск — запускаем по первому клику в любом месте
             document.addEventListener('click', function() {
                 if (audio.paused) {
                     audio.play().catch(() => {});
