@@ -17,12 +17,11 @@
             justify-content: center;
             align-items: center;
             font-family: 'Segoe UI', 'Arial', sans-serif;
-            background: #c77dff; /* ОДИН СПЛОШНОЙ СТАТИЧНЫЙ ЦВЕТ */
+            background: #c77dff;
             padding: 20px;
             overflow: hidden;
         }
 
-        /* Цветочный фон — СТАТИЧНЫЙ, без анимации */
         .flower-bg {
             position: fixed;
             top: 0;
@@ -39,7 +38,6 @@
             font-size: 3.5rem;
             opacity: 0.2;
             user-select: none;
-            /* НИКАКОЙ АНИМАЦИИ */
         }
 
         .flower:nth-child(1) { top: 5%; left: 3%; font-size: 5rem; opacity: 0.18; }
@@ -51,7 +49,6 @@
         .flower:nth-child(7) { top: 70%; left: 20%; font-size: 5.2rem; opacity: 0.15; }
         .flower:nth-child(8) { bottom: 5%; left: 40%; font-size: 4rem; opacity: 0.18; }
 
-        /* Основная карточка — СТАТИЧНАЯ */
         .card {
             position: relative;
             z-index: 10;
@@ -67,7 +64,6 @@
             border: 1px solid rgba(255, 220, 255, 0.8);
         }
 
-        /* Заголовок — СТАТИЧНЫЙ */
         h1 {
             font-size: 3.2rem;
             font-weight: 800;
@@ -94,7 +90,6 @@
             border-radius: 10px;
         }
 
-        /* Текст поздравления — СТАТИЧНЫЙ */
         .poem {
             font-size: 1.7rem;
             line-height: 2.3rem;
@@ -123,7 +118,6 @@
             font-size: 1.9rem;
         }
 
-        /* Строка "цвети всегда" — СТАТИЧНАЯ */
         .special-line {
             font-size: 2.2rem;
             font-weight: 700;
@@ -149,7 +143,6 @@
             margin: 0 6px;
         }
 
-        /* Цветочная рамка — СТАТИЧНАЯ */
         .flower-frame {
             display: flex;
             justify-content: center;
@@ -164,7 +157,6 @@
             display: inline-block;
         }
 
-        /* Аудио плеер — СТАТИЧНЫЙ */
         .music-player {
             margin: 30px 0 15px;
             background: rgba(255, 210, 255, 0.4);
@@ -211,25 +203,6 @@
             font-size: 1.6rem;
         }
 
-        .btn-play {
-            background: #c57aff;
-            border: none;
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-            padding: 10px 28px;
-            border-radius: 60px;
-            cursor: pointer;
-            box-shadow: 0 6px 0 #6f2b8f;
-            letter-spacing: 1px;
-        }
-
-        .btn-play:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #6f2b8f;
-        }
-
-        /* Адаптив */
         @media (max-width: 550px) {
             .card { padding: 30px 20px; }
             h1 { font-size: 2.5rem; }
@@ -248,7 +221,6 @@
 </head>
 <body>
 
-    <!-- Цветочный фон — СТАТИЧНЫЙ -->
     <div class="flower-bg">
         <span class="flower">🌸</span>
         <span class="flower">🌺</span>
@@ -262,7 +234,6 @@
         <span class="flower">🌷</span>
     </div>
 
-    <!-- Основная карточка -->
     <div class="card">
         <h1>🎉 Тётя Ирина 🎉</h1>
         <div class="subhead">С Днём Рождения!</div>
@@ -295,7 +266,6 @@
             🌟 С любовью и нежностью 🌟
         </div>
 
-        <!-- Музыкальный плеер -->
         <div class="music-player">
             <div class="music-label">
                 <i>🎵</i> Поздравительная
@@ -304,10 +274,6 @@
                 <source src="https://github.com/POLOLRED/Irina/blob/main/YA_dyshu-Irina_Allegrova_-_Den_Rozhdeniya_-_S_Dnjom_Rozhdeniya_Uspekha_radosti_vezeniya_lyubykh_zhelanijj_ispolneniya_i_million_nochejj_i_dnejj_S_Dnjom_Rozhdeniya_Lyubvi_do_golovokruzheniya_i_74820012%20(1).mp3?raw=true" type="audio/mpeg">
                 Ваш браузер не поддерживает аудио-тег.
             </audio>
-        </div>
-
-        <div style="margin-top: 5px;">
-            <button class="btn-play" id="playBtn">▶ Включить музыку</button>
         </div>
 
         <div style="margin-top: 20px; font-size: 1.1rem; color: #661d7a; opacity: 0.8; letter-spacing: 1px;">
@@ -319,39 +285,16 @@
         (function() {
             const audio = document.getElementById('birthdayAudio');
 
+            // Автозапуск при загрузке
             window.addEventListener('load', function() {
                 setTimeout(() => {
                     audio.play().catch(function(error) {
-                        console.log('Autoplay was prevented:', error);
+                        console.log('Autoplay blocked, will start on click');
                     });
                 }, 300);
             });
 
-            const playBtn = document.getElementById('playBtn');
-            if (playBtn) {
-                playBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (audio.paused) {
-                        audio.play().catch(err => {
-                            alert('Пожалуйста, нажмите на плеер для воспроизведения (разрешите автозапуск)');
-                        });
-                    } else {
-                        audio.pause();
-                        playBtn.textContent = '▶ Включить музыку';
-                    }
-                });
-
-                audio.addEventListener('play', function() {
-                    playBtn.textContent = '⏸ Пауза';
-                });
-                audio.addEventListener('pause', function() {
-                    playBtn.textContent = '▶ Включить музыку';
-                });
-                audio.addEventListener('ended', function() {
-                    playBtn.textContent = '▶ Включить музыку';
-                });
-            }
-
+            // Если браузер заблокировал автозапуск — запускаем по первому клику в любом месте
             document.addEventListener('click', function() {
                 if (audio.paused) {
                     audio.play().catch(() => {});
